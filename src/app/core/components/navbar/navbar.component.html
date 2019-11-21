@@ -1,0 +1,28 @@
+<div class="fixed-top">
+  <mat-toolbar class="title-shoping  ">O Shop
+    <button mat-button routerLink="/">Home</button>
+    <button mat-button routerLink="/shopping-cart">
+      Shopping Cart
+
+
+    </button>
+    <span matBadge="{{shoppingCartItemCount}}"></span>
+    <ng-template #anonymouseUser>
+      <button mat-button routerLink="/login">Log In</button>
+    </ng-template>
+
+
+    <button *ngIf="appUser; else anonymouseUser" mat-button [matMenuTriggerFor]="menu">{{appUser.name}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/my/orders">My Orders</button>
+
+      <button *ngIf="appUser.isAdmin" mat-menu-item routerLink="/admin/products">Manage Products</button>
+      <button *ngIf="appUser.isAdmin" mat-menu-item routerLink="/admin/orders">Manage Orders</button>
+
+
+
+      <button mat-menu-item (click)="auth.logout()">Log Out</button>
+    </mat-menu>
+
+  </mat-toolbar>
+</div>

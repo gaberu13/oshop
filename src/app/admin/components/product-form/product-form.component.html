@@ -1,0 +1,53 @@
+<div class="row mainRow">
+<div class="col-sm-6" >
+<form class="inputForm" #form='ngForm' (ngSubmit)="save(form.value)">
+    <mat-form-field>
+        <input [(ngModel)]="product.title" #title="ngModel" id="title" name="title" matInput placeholder="Title"  required>
+        <mat-error>Title is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+            <span matPrefix> $ </span>
+        <input [(ngModel)]="product.price" #price="ngModel" name="price"  matInput placeholder="Price" type="number" min="0" onkeypress="return event.charCode >= 48" required>
+        <mat-error>
+            Price is required!
+        </mat-error>
+        
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+            <mat-select [(ngModel)]="product.category"  #category="ngModel" name="categores" id="category" required >
+              <mat-option *ngFor="let category of categories$ | async " [value]="category.key" >
+                {{category.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error>
+            Category is required!
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input #imageUrl="ngModel" type="url" [(ngModel)]="product.imageUrl" name="imageUrl" matInput placeholder="ImageURL" required url  >
+        
+             <mat-error>
+                Image URL is required!
+            </mat-error>
+        
+            
+
+    </mat-form-field>
+<br>
+    <button  mat-raised-button color="primary">Save</button>
+    <button  (click)="delete()" mat-raised-button color="warn">Delete</button>
+
+    
+</form>
+</div>
+<div class="col-sm-6">
+    <div *ngIf="product.title" class="example-card" style="width: 30rem">
+        <product-card [product]="product" [show-actions]="false"></product-card>
+    </div>
+</div>
+</div>
+

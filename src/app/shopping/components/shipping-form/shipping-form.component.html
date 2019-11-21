@@ -1,0 +1,20 @@
+<form #form='ngForm'>
+        <mat-form-field>
+            <input matInput placeholder="Name" #name="ngModel" name="name" id="name" [(ngModel)]="shipping.name" required>
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput placeholder="Adress" #addressLine1="ngModel" name="addressLine1" [(ngModel)]="shipping.addressLine1" required>
+            </mat-form-field>
+            <mat-form-field>
+                    <input matInput placeholder="Adress No." #addressLine2="ngModel" name="addressLine2" [(ngModel)]="shipping.addressLine2" required>
+                </mat-form-field>
+                <mat-form-field>
+                        <input matInput placeholder="City" #city="ngModel" name="city" [(ngModel)]="shipping.city" required>
+                    </mat-form-field>
+                    <button
+                     mat-raised-button
+                     color="primary"
+                     (click)="placeOrder()"
+                     [disabled]="!form.valid"
+                     >Place Order</button>
+                     </form>

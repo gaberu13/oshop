@@ -1,0 +1,55 @@
+<div class="warn-btn"><h1>Shopping Cart</h1>
+
+  <p>
+      You have {{cart.totalItemsCount }} items in your shopping cart.
+      <button
+      (click)="clearCart()"
+      mat-button 
+      *ngIf="cart.items.length"
+      color="warn">Clear Shopping Cart</button>
+      
+  </p>
+</div>
+  <table class="table" *ngIf="cart.items.length">
+        <thead >
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Price
+                    Quantity
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+         <tbody >
+            <tr *ngFor="let item of cart.items ">
+                <td>
+                    {{item.product.title}}
+                </td>
+                <td>
+                    <product-quantity [product]="item.product" [shopping-cart]="cart"></product-quantity>
+                    
+                </td>
+                <td>
+                    {{item.totalPrice | currency}}
+                </td>
+            </tr>
+        </tbody> 
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><strong>{{cart.totalPrice | currency:'USD'}}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+   
+    <button
+    routerLink="/check-out"
+    *ngIf="cart.items.length"
+    mat-raised-button class="warn-btn"
+    color="primary">Check Out</button>
+    
